@@ -1,0 +1,4 @@
+.env
+text_to_sql_db.sqlite3
+__pycache__/
+*.pyc
