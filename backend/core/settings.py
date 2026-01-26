@@ -11,11 +11,8 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 import dj_database_url
-import os
+from decouple import config
 from pathlib import Path
-from dotenv import load_dotenv
-
-load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,17 +20,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
+SECRET_KEY = config('SECRET_KEY', default='django-insecure-6(nv$+zzmks#ukw3_oowp!h7w7!ek=z)v!+_tuaclnlevgx9q%')
+DEBUG = config('DEBUG', default=False, cast=bool)
 
-def _split_env_list(value):
-    if not value:
-        return []
-    return [item.strip() for item in value.split(",") if item.strip()]
-
-
-SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-6(nv$+zzmks#ukw3_oowp!h7w7!ek=z)v!+_tuaclnlevgx9q%')
-DEBUG = os.getenv('DEBUG', 'False').lower() in {'1', 'true', 'yes'}
-
-ALLOWED_HOSTS = _split_env_list(os.getenv('ALLOWED_HOSTS'))
+ALLOWED_HOSTS = [host.strip() for host in config('ALLOWED_HOSTS', default='').split(',') if host.strip()]
 
 
 # Application definition
@@ -61,9 +51,13 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-CORS_ALLOWED_ORIGINS = _split_env_list(os.getenv('CORS_ALLOWED_ORIGINS'))
+CORS_ALLOWED_ORIGINS = [
+    origin.strip()
+    for origin in config('CORS_ALLOWED_ORIGINS', default='').split(',')
+    if origin.strip()
+]
 CORS_ALLOW_ALL_ORIGINS = (
-    os.getenv('CORS_ALLOW_ALL_ORIGINS', 'True').lower() in {'1', 'true', 'yes'}
+    config('CORS_ALLOW_ALL_ORIGINS', default=True, cast=bool)
     if not CORS_ALLOWED_ORIGINS
     else False
 )
@@ -93,7 +87,7 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
-        default=os.getenv('DATABASE_URL'),
+        default=config('DATABASE_URL', default='sqlite:///' + str(BASE_DIR / 'db.sqlite3')),
     )
 }
 
