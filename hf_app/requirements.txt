@@ -1,3 +1,7 @@
-transformers
+transformers>=4.42.0
 torch
 sentencepiece
+sentence-transformers
+gradio
+scipy
+accelerate

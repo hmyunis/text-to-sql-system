@@ -1,0 +1,74 @@
+[
+  {"question": "Show me all customers", "context": "api_customer: id, name, email, city", "answer": "SELECT * FROM api_customer"},
+  {"question": "List every client in the database", "context": "api_customer: id, name, email, city", "answer": "SELECT * FROM api_customer"},
+  {"question": "Get me the full customer list", "context": "api_customer: id, name, email, city", "answer": "SELECT * FROM api_customer"},
+  {"question": "Show me the names of all customers", "context": "api_customer: id, name, email, city", "answer": "SELECT name FROM api_customer"},
+  {"question": "List customer names only", "context": "api_customer: id, name, email, city", "answer": "SELECT name FROM api_customer"},
+  
+  {"question": "Who lives in Axum?", "context": "api_customer: id, name, email, city", "answer": "SELECT * FROM api_customer WHERE city = 'Axum'"},
+  {"question": "Show me customers from Axum", "context": "api_customer: id, name, email, city", "answer": "SELECT * FROM api_customer WHERE city = 'Axum'"},
+  {"question": "List clients based in Axum", "context": "api_customer: id, name, email, city", "answer": "SELECT * FROM api_customer WHERE city = 'Axum'"},
+  {"question": "Which customers are from Addis Ababa?", "context": "api_customer: id, name, email, city", "answer": "SELECT * FROM api_customer WHERE city = 'Addis Ababa'"},
+  {"question": "Get me customers from the capital city Addis Ababa", "context": "api_customer: id, name, email, city", "answer": "SELECT * FROM api_customer WHERE city = 'Addis Ababa'"},
+  
+  {"question": "What is the email of Yonas?", "context": "api_customer: id, name, email, city", "answer": "SELECT email FROM api_customer WHERE name = 'Yonas'"},
+  {"question": "Get contact info for Yonas", "context": "api_customer: id, name, email, city", "answer": "SELECT email FROM api_customer WHERE name = 'Yonas'"},
+  {"question": "I need the email address for the customer named Kebede", "context": "api_customer: id, name, email, city", "answer": "SELECT email FROM api_customer WHERE name = 'Kebede'"},
+  
+  {"question": "How many customers do we have?", "context": "api_customer: id, name, email, city", "answer": "SELECT COUNT(*) FROM api_customer"},
+  {"question": "Count the total number of clients", "context": "api_customer: id, name, email, city", "answer": "SELECT COUNT(*) FROM api_customer"},
+  
+  {"question": "Show me all products", "context": "api_product: id, name, price, category", "answer": "SELECT * FROM api_product"},
+  {"question": "List all items for sale", "context": "api_product: id, name, price, category", "answer": "SELECT * FROM api_product"},
+  {"question": "What are the available products?", "context": "api_product: id, name, price, category", "answer": "SELECT * FROM api_product"},
+  
+  {"question": "Show me expensive products", "context": "api_product: id, name, price, category", "answer": "SELECT * FROM api_product ORDER BY price DESC LIMIT 5"},
+  {"question": "List the most expensive items", "context": "api_product: id, name, price, category", "answer": "SELECT * FROM api_product ORDER BY price DESC LIMIT 5"},
+  {"question": "What are the highest priced items?", "context": "api_product: id, name, price, category", "answer": "SELECT * FROM api_product ORDER BY price DESC LIMIT 5"},
+  
+  {"question": "Show me cheap products", "context": "api_product: id, name, price, category", "answer": "SELECT * FROM api_product ORDER BY price ASC LIMIT 5"},
+  {"question": "List the lowest priced items", "context": "api_product: id, name, price, category", "answer": "SELECT * FROM api_product ORDER BY price ASC LIMIT 5"},
+  {"question": "Find items that cost very little", "context": "api_product: id, name, price, category", "answer": "SELECT * FROM api_product ORDER BY price ASC LIMIT 5"},
+  
+  {"question": "Show me products with price higher than 15", "context": "api_product: id, name, price, category", "answer": "SELECT * FROM api_product WHERE price > 15"},
+  {"question": "List items that cost more than 15 Birr", "context": "api_product: id, name, price, category", "answer": "SELECT * FROM api_product WHERE price > 15"},
+  {"question": "Which items are over 50 Birr?", "context": "api_product: id, name, price, category", "answer": "SELECT * FROM api_product WHERE price > 50"},
+  {"question": "Show me products cheaper than 10", "context": "api_product: id, name, price, category", "answer": "SELECT * FROM api_product WHERE price < 10"},
+  {"question": "List items under 10 dollars", "context": "api_product: id, name, price, category", "answer": "SELECT * FROM api_product WHERE price < 10"},
+  
+  {"question": "Show me all Coffee products", "context": "api_product: id, name, price, category", "answer": "SELECT * FROM api_product WHERE category = 'Coffee'"},
+  {"question": "List items in the Coffee category", "context": "api_product: id, name, price, category", "answer": "SELECT * FROM api_product WHERE category = 'Coffee'"},
+  {"question": "Do we have any Electronics?", "context": "api_product: id, name, price, category", "answer": "SELECT * FROM api_product WHERE category = 'Electronics'"},
+  
+  {"question": "What is the average price of products?", "context": "api_product: id, name, price, category", "answer": "SELECT AVG(price) FROM api_product"},
+  {"question": "Calculate average cost of items", "context": "api_product: id, name, price, category", "answer": "SELECT AVG(price) FROM api_product"},
+  {"question": "What is the most expensive price?", "context": "api_product: id, name, price, category", "answer": "SELECT MAX(price) FROM api_product"},
+  
+  {"question": "Show me all orders", "context": "api_order: id, customer, product, quantity, order_date", "answer": "SELECT * FROM api_order"},
+  {"question": "List the transaction history", "context": "api_order: id, customer, product, quantity, order_date", "answer": "SELECT * FROM api_order"},
+  
+  {"question": "Show me orders with quantity more than 5", "context": "api_order: id, customer, product, quantity, order_date", "answer": "SELECT * FROM api_order WHERE quantity > 5"},
+  {"question": "List bulk orders with quantity over 10", "context": "api_order: id, customer, product, quantity, order_date", "answer": "SELECT * FROM api_order WHERE quantity > 10"},
+  {"question": "Show me small orders", "context": "api_order: id, customer, product, quantity, order_date", "answer": "SELECT * FROM api_order WHERE quantity < 3"},
+  
+  {"question": "Count total orders", "context": "api_order: id, customer, product, quantity, order_date", "answer": "SELECT COUNT(*) FROM api_order"},
+  {"question": "How many times have people ordered?", "context": "api_order: id, customer, product, quantity, order_date", "answer": "SELECT COUNT(*) FROM api_order"},
+  
+  {"question": "Show me recent orders", "context": "api_order: id, customer, product, quantity, order_date", "answer": "SELECT * FROM api_order ORDER BY order_date DESC LIMIT 5"},
+  {"question": "List the latest 5 orders", "context": "api_order: id, customer, product, quantity, order_date", "answer": "SELECT * FROM api_order ORDER BY order_date DESC LIMIT 5"},
+  
+  {"question": "Show me distinct cities", "context": "api_customer: id, name, email, city", "answer": "SELECT DISTINCT city FROM api_customer"},
+  {"question": "List all unique locations of customers", "context": "api_customer: id, name, email, city", "answer": "SELECT DISTINCT city FROM api_customer"},
+  
+  {"question": "Find the customer with email yonas@example.com", "context": "api_customer: id, name, email, city", "answer": "SELECT * FROM api_customer WHERE email = 'yonas@example.com'"},
+  {"question": "Who owns the email test@test.com?", "context": "api_customer: id, name, email, city", "answer": "SELECT * FROM api_customer WHERE email = 'test@test.com'"},
+  
+  {"question": "List Spices sorted by price", "context": "api_product: id, name, price, category", "answer": "SELECT * FROM api_product WHERE category = 'Spices' ORDER BY price DESC"},
+  {"question": "Show me Spices from most expensive to least", "context": "api_product: id, name, price, category", "answer": "SELECT * FROM api_product WHERE category = 'Spices' ORDER BY price DESC"},
+  
+  {"question": "What is the total quantity of items sold?", "context": "api_order: id, customer, product, quantity, order_date", "answer": "SELECT SUM(quantity) FROM api_order"},
+  {"question": "Sum up all order quantities", "context": "api_order: id, customer, product, quantity, order_date", "answer": "SELECT SUM(quantity) FROM api_order"},
+
+  {"question": "Show me the description of table api_customer", "context": "api_customer: id, name, email, city", "answer": "SELECT * FROM api_customer LIMIT 1"},
+  {"question": "Sample data from customers", "context": "api_customer: id, name, email, city", "answer": "SELECT * FROM api_customer LIMIT 3"}
+]

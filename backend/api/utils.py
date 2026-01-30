@@ -24,3 +24,18 @@ def get_text_columns():
             if "char" in field_type or "text" in field_type or "email" in field_type:
                 text_columns.append(field.name)
     return text_columns
+
+def get_all_columns_list():
+    """
+    Returns a simple list of all columns in the database.
+    Format: ['table_name.column_name', ...]
+    """
+    app_models = apps.get_app_config('api').get_models()
+    col_list = []
+
+    for model in app_models:
+        table_name = model._meta.db_table
+        for field in model._meta.fields:
+            col_list.append(f"{table_name}.{field.name}")
+
+    return col_list
