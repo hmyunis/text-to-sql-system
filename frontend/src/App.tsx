@@ -249,7 +249,10 @@ export default function App() {
                           <div className="mt-2 grid gap-2 text-xs text-slate-600">
                             <div className="font-mono">Generated: {row.generated_sql}</div>
                             <div className="font-mono">Expected: {row.expected_sql}</div>
-                            {row.debug && <div>Debug: {row.debug}</div>}
+                            {row.bleu_score !== undefined && row.bleu_score !== null && (
+                              <div>BLEU Score: {row.bleu_score}</div>
+                            )}
+                            {row.debug && row.debug !== "Success" && <div>Debug: {row.debug}</div>}
                           </div>
                         </div>
                       ))}

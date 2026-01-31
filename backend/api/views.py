@@ -23,8 +23,8 @@ def compare_query_results(sql_generated, sql_expected):
         if "error" in res_exp:
             return False, "Gold standard query failed (bad test case)"
 
-        # Compare Data (ignoring column order if possible, but strict for now)
-        # We sort the data to ensure order doesn't fail the test
+        # Compare Data
+        # We sort the data to ensure column order doesn't fail the test
         data_gen = sorted(str(d) for d in res_gen.get("data", []))
         data_exp = sorted(str(d) for d in res_exp.get("data", []))
 
@@ -47,7 +47,6 @@ def ask_question(request):
         client = Client(model_id, token=os.getenv("HF_TOKEN"))
 
         # 3. Predict (Send Question + List of Columns)
-        # We send the list as a string because Gradio accepts text
         generated_sql = client.predict(user_question, str(all_cols))
 
         # 4. Clean up output (T5 sometimes generates text, rarely extra junk)
