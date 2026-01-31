@@ -3,6 +3,10 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from gradio_client import Client
 from nltk.translate.bleu_score import sentence_bleu, SmoothingFunction
+from deep_translator import GoogleTranslator
+from langdetect import detect, DetectorFactory
+
+DetectorFactory.seed = 0
 
 from .utils import get_schema_string, get_all_columns_list
 from .services import execute_query
@@ -38,7 +42,29 @@ def ask_question(request):
     if not user_question:
         return Response({"error": "No question provided"}, status=400)
 
-    # 1. Get all columns to send to the Vectorizer
+    # 1. Translate if needed
+    try:
+        # Default to auto
+        src_lang = 'auto'
+        try:
+            # Try to help the translator by detecting Amharic explicitly
+            # This helps for short queries where 'auto' might be ambiguous
+            if detect(user_question) == 'am':
+                src_lang = 'am'
+                print(f"Detected Amharic via langdetect")
+        except:
+            pass # Fallback to auto if detection fails
+
+        translated_q = GoogleTranslator(source=src_lang, target='en').translate(user_question)
+        
+        if translated_q and translated_q != user_question:
+             print(f"Translation ({src_lang}): {user_question} -> {translated_q}")
+             user_question = translated_q
+             
+    except Exception as e:
+        print(f"Translation failed: {e}")
+
+    # 2. Get all columns to send to the Vectorizer
     all_cols = get_all_columns_list()
 
     try:

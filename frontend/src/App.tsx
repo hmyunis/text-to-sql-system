@@ -154,24 +154,30 @@ export default function App() {
               </CardHeader>
               <CardContent className="p-0">
                 <div className="max-h-125 overflow-auto">
-                  <Table>
-                    <TableHeader>
-                      <TableRow>
-                        {askMutation.data.columns.map((col: string) => (
-                          <TableHead key={col} className="bg-slate-50 uppercase text-[11px] font-bold">{col}</TableHead>
-                        ))}
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {askMutation.data.data.map((row: any, idx: number) => (
-                        <TableRow key={idx}>
+                  {askMutation.data.data.length === 0 ? (
+                     <div className="p-8 text-center text-slate-500">
+                       No results found.
+                     </div>
+                  ) : (
+                    <Table>
+                      <TableHeader>
+                        <TableRow>
                           {askMutation.data.columns.map((col: string) => (
-                            <TableCell key={col}>{row[col]}</TableCell>
+                            <TableHead key={col} className="bg-slate-50 uppercase text-[11px] font-bold">{col}</TableHead>
                           ))}
                         </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
+                      </TableHeader>
+                      <TableBody>
+                        {askMutation.data.data.map((row: any, idx: number) => (
+                          <TableRow key={idx}>
+                            {askMutation.data.columns.map((col: string) => (
+                              <TableCell key={col}>{row[col]}</TableCell>
+                            ))}
+                          </TableRow>
+                        ))}
+                      </TableBody>
+                    </Table>
+                  )}
                 </div>
               </CardContent>
             </Card>
